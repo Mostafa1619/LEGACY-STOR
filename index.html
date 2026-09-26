@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>متجر ألعاب LEGACY STOR</title>
+    <style>
+        :root {
+            --steam-dark: #171a21;
+            --steam-card: #1b2838;
+            --steam-blue: #66c0f4;
+            --steam-btn: #4c6b22;
+            --steam-btn-hover: #68932f;
+            --text-color: #c6d4df;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--steam-dark);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #171a21;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--steam-blue); }
+
+        .hero {
+            background: linear-gradient(180deg, #1b2838 0%, #171a21 100%);
+            padding: 40px 5%;
+            text-align: center;
+            border-bottom: 1px solid #2a475e;
+        }
+
+        .hero h1 { color: #fff; font-size: 2.5rem; margin-bottom: 10px; }
+        .hero p { font-size: 1.1rem; color: var(--steam-blue); }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            border-right: 4px solid var(--steam-blue);
+            padding-right: 10px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .game-card {
+            background-color: var(--steam-card);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .game-card:hover { transform: translateY(-5px); }
+
+        .game-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .game-info {
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .game-title { color: #fff; font-size: 1.2rem; margin: 0 0 8px 0; }
+
+        .game-desc {
+            font-size: 0.85rem;
+            color: #acb2b8;
+            line-height: 1.4;
+            margin-bottom: 15px;
+            flex: 1;
+        }
+
+        .game-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #2a475e;
+            padding-top: 10px;
+            margin-top: auto;
+        }
+
+        .price { color: #a4d007; font-size: 1.1rem; font-weight: bold; }
+
+        .buy-btn {
+            background-color: var(--steam-btn);
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .buy-btn:hover { background-color: var(--steam-btn-hover); }
+
+        footer {
+            background-color: #171a21;
+            text-align: center;
+            padding: 20px;
+            margin-top: 50px;
+            border-top: 1px solid #2a475e;
+            font-size: 0.85rem;
+            color: #8f98a0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><span>🎮</span> STEAM STORE</div>
+    </header>
+
+    <div class="hero">
+        <h1>أفضل ألعاب Steam بين يديك</h1>
+        <p>استكشف أشهر الألعاب المجانية والمدفوعة</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">الألعاب الأكثر مبيعاً وشعبية</h2>
+        <div class="games-grid">
+
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Counter-Strike 2" class="game-img">
+                <div class="game-info">
+                    <h3 class="game-title">Counter-Strike 2</h3>
+                    <p class="game-desc">لعبة التصويب التنافسية الأشهر عالمياً بأسلوب لعب سريع وتكتيكي.</p>
+                    <div class="game-footer">
+                        <span class="price">مجانية</span>
+                        <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank" class="buy-btn">عرض في Steam</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk 2077" class="game-img">
+                <div class="game-info">
+                    <h3 class="game-title">Cyberpunk 2077</h3>
+                    <p class="game-desc">لعبة مغامرات وتبادل أدوار في عالم مفتوح مستقبلي.</p>
+                    <div class="game-footer">
+                        <span class="price" style="color:#b0aeac;">$59.99</span>
+                        <a href="https://store.steampowered.com/app/1091500/Cyberpunk_2077/" target="_blank" class="buy-btn">عرض في Steam</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <LEGACY STOR>جميع الحقوق محفوظة © 2026</LEGACY STOR>
+
+</body>
+</html>
