@@ -267,9 +267,9 @@
                 { id: 202, name: "FiveM Executive Menu", prices: { day: 7, week: 20, month: 40, lifetime: 100 }, delivery: "Download Link: https://legacy-store.com/download/exec.exe | License: EXEC-8871-331", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500" }
             ],
             accounts: [
-                { id: 301, name: "Fivem Bundel", price: 35, desc: "حزمة فايف ام كاملة شاملة الحسابات والتفعيل", delivery: "Rockstar: rock_bundle@gmail.com:Pass123! | Steam FA: steam_bundle@gmail.com:Pass123!", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=500" },
-                { id: 302, name: "Fivem Rockstar Account", price: 12, desc: "حساب روكستار جاهز للعب فايف ام فوراً", delivery: "Rockstar Account: rockstar_2026@gmail.com : Pass_3030!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
-                { id: 303, name: "FA Steam Account", price: 20, desc: "حساب ستيم الوصول الكامل Full Access", delivery: "Steam FA Mail: steam_fa@mail.com : Pass_FA_2026", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" }
+                { id: 301, name: "Fivem Bundel", price: 1, desc: "حزمة فايف ام كاملة شاملة الحسابات والتفعيل", delivery: "Rockstar: rock_bundle@gmail.com:Pass123! | Steam FA: steam_bundle@gmail.com:Pass123!", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=500" },
+                { id: 302, name: "Fivem Rockstar Account", price: 0.50, desc: "حساب روكستار جاهز للعب فايف ام فوراً", delivery: "Rockstar Account: rockstar_2026@gmail.com : Pass_3030!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+                { id: 303, name: "FA Steam Account", price: 0.10, desc: "حساب ستيم الوصول الكامل Full Access", delivery: "Steam FA Mail: steam_fa@mail.com : Pass_FA_2026", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" }
             ]
         };
 
@@ -483,7 +483,7 @@
 
         function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
         function checkAdminAuth() {
-            if (document.getElementById('admin-pass').value === ADMIN_PASS) {
+            if (document.getElementById('admin-pass').value === ADMIN_PASS) {SASA2010
                 closeModal('admin-auth-modal');
                 renderAdminDashboard();
                 document.getElementById('admin-modal').classList.add('active');
