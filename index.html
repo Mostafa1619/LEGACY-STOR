@@ -3,93 +3,155 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGACY STORE | المتجر الأفضل للألعاب والحسابات</title>
+    <title>LEGACY STORE | المتجر الأفضل للألعاب والحسابات والخدمات</title>
+    <!-- خط تجوال من جوجل -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- أيقونات FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* ==========================================
-           1. الإعدادات العامة والتنسيق الأساسي
-           ========================================== */
+        :root {
+            --primary-color: #ff0055;
+            --secondary-color: #00d2ff;
+            --accent-green: #00ff88;
+            --bg-dark: #0a0c10;
+            --card-bg: #131722;
+            --text-color: #ffffff;
+            --text-muted: #94a3b8;
+            --border-color: #222938;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Tajawal', sans-serif;
         }
 
         body {
-            background-color: #0d0f12;
-            color: #ffffff;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
             direction: rtl;
         }
 
-        /* الهيدر والعنوان */
+        /* Navbar */
         header {
-            background: linear-gradient(180deg, #161922 0%, #0d0f12 100%);
-            padding: 40px 20px;
-            text-align: center;
-            border-bottom: 2px solid #ff0055;
-            box-shadow: 0px 4px 20px rgba(255, 0, 85, 0.2);
+            background: rgba(19, 23, 34, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid var(--primary-color);
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        header h1 {
-            font-size: 3rem;
-            color: #ff0055;
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--primary-color);
             text-transform: uppercase;
             letter-spacing: 2px;
-            text-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+            text-shadow: 0 0 15px rgba(255, 0, 85, 0.6);
         }
 
-        header p {
-            color: #a0a5b5;
-            margin-top: 10px;
-            font-size: 1.1rem;
+        nav a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-right: 20px;
+            font-weight: 700;
+            transition: 0.3s;
         }
 
-        /* الحاوية الرئيسية */
+        nav a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Hero Banner */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: radial-gradient(circle at center, rgba(255,0,85,0.15) 0%, rgba(10,12,16,1) 70%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        /* Container */
         .container {
             max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
 
-        /* عناوين الأقسام */
         .section-title {
             font-size: 1.8rem;
-            margin-bottom: 25px;
-            color: #00d2ff;
-            border-right: 4px solid #00d2ff;
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+            border-right: 5px solid var(--secondary-color);
             padding-right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* شبكة المنتجات (Grid) */
+        /* Grid Layout */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 25px;
-            margin-bottom: 50px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
         }
 
-        /* كارت المنتج */
+        /* Product Card */
         .card {
-            background-color: #161922;
+            background-color: var(--card-bg);
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #262b38;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
         }
 
         .card:hover {
-            transform: translateY(-7px);
-            border-color: #ff0055;
-            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.15);
+            transform: translateY(-8px);
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(255, 0, 85, 0.25);
+        }
+
+        .card-img-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
         }
 
         .card img {
             width: 100%;
-            height: 170px;
+            height: 100%;
             object-fit: cover;
+        }
+
+        .badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 10px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            border-radius: 4px;
         }
 
         .card-content {
@@ -101,96 +163,193 @@
         }
 
         .card-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: bold;
             margin-bottom: 10px;
         }
 
         .card-desc {
             font-size: 0.9rem;
-            color: #8c93a8;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        /* Duration Selector for Hacks */
+        .duration-selector {
             margin-bottom: 15px;
-            line-height: 1.4;
+        }
+
+        .duration-selector label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 5px;
+        }
+
+        .duration-selector select {
+            width: 100%;
+            padding: 8px;
+            background: #1c2230;
+            color: #fff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            outline: none;
         }
 
         .price-tag {
-            font-size: 1.3rem;
-            color: #00ff88;
+            font-size: 1.4rem;
+            color: var(--accent-green);
             font-weight: bold;
             margin-bottom: 15px;
         }
 
-        /* زر الشراء */
         .btn-buy {
             display: block;
             width: 100%;
             padding: 12px;
-            background-color: #ff0055;
+            background: linear-gradient(45deg, var(--primary-color), #d00045);
             color: white;
             text-align: center;
             text-decoration: none;
             font-weight: bold;
             border-radius: 6px;
-            transition: background 0.2s ease;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-buy:hover {
-            background-color: #e0004c;
+            opacity: 0.9;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
         }
 
-        /* الفوتر (أسفل الصفحة) */
+        /* Payment Methods Section */
+        .payment-section {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--border-color);
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .payment-card {
+            background: #1c2230;
+            padding: 15px 25px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .payment-card i {
+            font-size: 1.5rem;
+        }
+
+        .paypal { color: #003087; }
+        .vodafone { color: #e60000; }
+        .visa { color: #1a1f71; }
+        .mastercard { color: #eb001b; }
+
         footer {
             text-align: center;
             padding: 30px;
-            background-color: #161922;
-            color: #6c7284;
-            border-top: 1px solid #262b38;
-            margin-top: 50px;
+            background-color: #07080b;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border-color);
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
+    <!-- الهيدر والناڤ بار -->
     <header>
-        <h1>LEGACY STORE</h1>
-        <p>متجرك الأول لحسابات فايف ام، روكستار، والألعاب والهاكات الموثوقة</p>
+        <div class="logo">LEGACY STORE</div>
+        <nav>
+            <a href="#steam">ألعاب Steam</a>
+            <a href="#fivem">هاكات FiveM</a>
+            <a href="#accounts">الحسابات المدمجة</a>
+            <a href="#payment">طرق الدفع</a>
+        </nav>
     </header>
+
+    <!-- الهيرو بَانَر -->
+    <section class="hero">
+        <h1>مرحباً بك في LEGACY STORE</h1>
+        <p>المتجر الأسرع والأكثر أماناً لشراء ألعاب Steam، حسابات Rockstar، وهاكات FiveM</p>
+    </section>
 
     <div class="container">
 
         <!-- ==========================================
-             قسم 1: حسابات FiveM و Rockstar
+             قسم 1: ألعاب Steam
              ========================================== -->
-        <h2 class="section-title">حسابات FiveM & Rockstar</h2>
+        <h2 class="section-title" id="steam"><i class="fa-brands fa-steam"></i> ألعاب Steam الجاهزة</h2>
         <div class="products-grid">
 
-            <!-- منتج 1 -->
+            <!-- لعبة 1 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x170/161922/ffffff?text=Rockstar+Account" alt="منتج">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="GTA V Steam">
+                    <span class="badge">الأكثر مبيعاً</span>
+                </div>
                 <div class="card-content">
                     <div>
-                        <div class="card-title">حساب روكستار (GTA V جاهز)</div>
-                        <div class="card-desc">حساب روكستار مفعل جاهز للربط على FiveM مع ضمان ذهبي.</div>
+                        <div class="card-title">GTA V Premium Edition</div>
+                        <div class="card-desc">كود تفعيل نُسخة Steam الأصلية كاملة مع الأونلاين.</div>
                     </div>
                     <div>
-                        <div class="price-tag">$5.99</div>
-                        <a href="https://discord.gg/YOUR_LINK" class="btn-buy" target="_blank">شراء الآن</a>
+                        <div class="price-tag">$14.99</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الآن</a>
                     </div>
                 </div>
             </div>
 
-            <!-- منتج 2 -->
+            <!-- لعبة 2 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x170/161922/ffffff?text=FiveM+Ready" alt="منتج">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="Rust Steam">
+                </div>
                 <div class="card-content">
                     <div>
-                        <div class="card-title">حساب FiveM جاهز للعب</div>
-                        <div class="card-desc">حساب غير مبند من سيرفرات السيرش والفايف ام الأساسية.</div>
+                        <div class="card-title">Rust (Steam Key)</div>
+                        <div class="card-desc">مفتاح تفعيل لعبة Rust الأصلية على حسابك الشخصي في ستيم.</div>
                     </div>
                     <div>
-                        <div class="price-tag">$7.50</div>
-                        <a href="https://discord.gg/YOUR_LINK" class="btn-buy" target="_blank">شراء الآن</a>
+                        <div class="price-tag">$19.99</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الآن</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لعبة 3 -->
+            <div class="card">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Cyberpunk 2077">
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-title">Cyberpunk 2077</div>
+                        <div class="card-desc">لعبة سايبر بانك 2077 مفتاح تفعيل ستيم مباشر.</div>
+                    </div>
+                    <div>
+                        <div class="price-tag">$29.99</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الآن</a>
                     </div>
                 </div>
             </div>
@@ -199,49 +358,142 @@
 
 
         <!-- ==========================================
-             قسم 2: البرامج والخدمات (الهاكات والادوات)
+             قسم 2: هاكات مودات FiveM (بالمدة)
              ========================================== -->
-        <h2 class="section-title">البرامج والأدوات (Mod Menus)</h2>
+        <h2 class="section-title" id="fivem"><i class="fa-solid fa-code"></i> هاكات ومودات FiveM</h2>
         <div class="products-grid">
 
-            <!-- منتج 3 -->
+            <!-- هاك 1 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x170/161922/ffffff?text=FiveM+Menu" alt="منتج">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=600&q=80" alt="FiveM Menu">
+                    <span class="badge">آمن 100%</span>
+                </div>
                 <div class="card-content">
                     <div>
-                        <div class="card-title">منيو فايف ام (اشتراك شهر)</div>
-                        <div class="card-desc">أقوى منيو للحماية والتعديل داخل السيرفرات مع تحديثات يومية.</div>
+                        <div class="card-title">LEGACY VIP Menu (FiveM)</div>
+                        <div class="card-desc">منيو متكامل للحماية، كشف أماكن (ESP)، وتعديلات خرافية للسيرفرات.</div>
+                        
+                        <!-- اختيار المدة -->
+                        <div class="duration-selector">
+                            <label>اختر مدة الاشتراك:</label>
+                            <select onchange="updatePrice(this, 'price-menu-1')">
+                                <option value="5.00">يوم واحد - $5.00</option>
+                                <option value="15.00">أسبوع - $15.00</option>
+                                <option value="35.00" selected>شهر - $35.00</option>
+                                <option value="99.00">لايف تايم (مدى الحياة) - $99.00</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div>
-                        <div class="price-tag">$15.00</div>
-                        <a href="https://discord.gg/YOUR_LINK" class="btn-buy" target="_blank">شراء الآن</a>
+                        <div class="price-tag" id="price-menu-1">$35.00</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الآن</a>
                     </div>
                 </div>
             </div>
 
-            <!-- منتج 4 -->
+            <!-- هاك 2 -->
             <div class="card">
-                <img src="https://via.placeholder.com/300x170/161922/ffffff?text=Spoofer" alt="منتج">
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="HWID Spoofer">
+                </div>
                 <div class="card-content">
                     <div>
-                        <div class="card-title">سبوفر فك البان (Spoofer)</div>
-                        <div class="card-desc">يفك حظر الهاردوير (HWID) لجميع الألعاب بضغطة زر.</div>
+                        <div class="card-title">HWID Spoofer (فك البان)</div>
+                        <div class="card-desc">برنامج فك الحظر عن الهاردوير لـ FiveM وجميع ألعاب الأونلاين.</div>
+                        
+                        <!-- اختيار المدة -->
+                        <div class="duration-selector">
+                            <label>اختر مدة الاشتراك:</label>
+                            <select onchange="updatePrice(this, 'price-menu-2')">
+                                <option value="4.00">يوم واحد - $4.00</option>
+                                <option value="12.00">أسبوع - $12.00</option>
+                                <option value="25.00" selected>شهر - $25.00</option>
+                                <option value="70.00">لايف تايم (مدى الحياة) - $70.00</option>
+                            </select>
+                        </div>
                     </div>
+
                     <div>
-                        <div class="price-tag">$20.00</div>
-                        <a href="https://discord.gg/YOUR_LINK" class="btn-buy" target="_blank">شراء الآن</a>
+                        <div class="price-tag" id="price-menu-2">$25.00</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الآن</a>
                     </div>
                 </div>
             </div>
 
+        </div>
+
+
+        <!-- ==========================================
+             قسم 3: الحسابات المشتركة
+             ========================================== -->
+        <h2 class="section-title" id="accounts"><i class="fa-solid fa-users-viewfinder"></i> الحسابات والشحنات المدمجة</h2>
+        <div class="products-grid">
+
+            <!-- منتج الحساب المدمج -->
+            <div class="card" style="grid-column: 1 / -1; max-width: 600px; margin: 0 auto;">
+                <div class="card-img-container" style="height: 220px;">
+                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&w=800&q=80" alt="Rockstar and Steam">
+                    <span class="badge" style="background:#00d2ff; color:#000;">عرض خاص</span>
+                </div>
+                <div class="card-content">
+                    <div>
+                        <div class="card-title" style="font-size: 1.6rem;">باقة الحساب الذهبية: حساب روكستار + ستيم معاً</div>
+                        <div class="card-desc" style="font-size: 1rem;">
+                            احصل على حساب Steam وبداخله لعبة GTA V ومرتبط بحساب Rockstar Social Club جاهز تماماً للعب بدون أي خطوات إضافية! الحساب ملكك بالكامل مع إمكانية تغيير جميع البيانات والإيميل.
+                        </div>
+                    </div>
+                    <div>
+                        <div class="price-tag" style="font-size: 2rem;">$18.99</div>
+                        <a href="https://discord.gg/YOUR_DISCORD" target="_blank" class="btn-buy">شراء الحساب المدمج الآن</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- ==========================================
+             قسم 4: طرق الدفع المتاحة
+             ========================================== -->
+        <div class="payment-section" id="payment">
+            <h2><i class="fa-solid fa-wallet"></i> طرق الدفع المتاحة</h2>
+            <p style="color: var(--text-muted); margin-top: 5px;">نوفر لك آمن وأسهل وسائل الدفع العالمية والمحلية</p>
+            
+            <div class="payment-methods">
+                <div class="payment-card">
+                    <i class="fa-solid fa-mobile-screen-button vodafone"></i>
+                    <span>Vodafone Cash</span>
+                </div>
+                <div class="payment-card">
+                    <i class="fa-brands fa-cc-paypal paypal"></i>
+                    <span>PayPal</span>
+                </div>
+                <div class="payment-card">
+                    <i class="fa-brands fa-cc-visa visa"></i>
+                    <span>Visa Card</span>
+                </div>
+                <div class="payment-card">
+                    <i class="fa-brands fa-cc-mastercard mastercard"></i>
+                    <span>MasterCard</span>
+                </div>
+            </div>
         </div>
 
     </div>
 
     <!-- الفوتر -->
     <footer>
-        <p>جميع الحقوق محفوظة لـ <strong>LEGACY STORE</strong> &copy; 2026</p>
+        <p>جميع الحقوق محفوظة © 2026 لـ <strong>LEGACY STORE</strong></p>
     </footer>
 
+    <!-- سكربت تغيير السعر عند اختيار المدة -->
+    <script>
+        function updatePrice(selectElement, priceElementId) {
+            const selectedPrice = selectElement.value;
+            document.getElementById(priceElementId).innerText = '$' + selectedPrice;
+        }
+    </script>
 </body>
 </html>
