@@ -91,7 +91,6 @@
         .btn-approve { background: var(--success); color: #000; }
         .btn-reject { background: var(--danger); color: #fff; }
 
-        .success-box { background: rgba(46, 213, 115, 0.1); border: 1px solid var(--success); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .pending-box { background: rgba(255, 165, 0, 0.1); border: 1px solid var(--warning); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .item-key { font-family: monospace; background: #000; padding: 10px; border-radius: 5px; border: 1px dashed var(--primary-blue); color: var(--primary-blue); margin-top: 10px; word-break: break-all; }
         .receipt-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 1px solid var(--primary-blue); }
@@ -119,7 +118,7 @@
     <div class="container">
         <div class="hero">
             <h1>LEGACY STORE</h1>
-            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام تلقائي فوري أو عن طريق الدعم!</p>
+            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام بعد إتمام وتأكيد الدفع!</p>
         </div>
 
         <h2 class="section-title" id="steam"><i class="fa-brands fa-steam"></i> ألعاب Steam</h2>
@@ -142,7 +141,7 @@
                 <span>الإجمالي:</span>
                 <span id="cart-total" style="color: var(--primary-blue);">0$</span>
             </div>
-            <button class="cart-btn" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="proceedToCheckout()">شراء الآن</button>
+            <button class="cart-btn" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="proceedToCheckout()">الانتقال للدفع</button>
         </div>
     </div>
 
@@ -178,18 +177,7 @@
             </div>
 
             <div id="payment-details"></div>
-            <button class="cart-btn" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="validateAndSubmit()">متابعة الشراء</button>
-        </div>
-    </div>
-
-    <!-- Success Modal -->
-    <div class="modal" id="success-modal">
-        <div class="modal-content" style="text-align: center;">
-            <i class="fa-solid fa-circle-check" style="font-size: 60px; color: var(--success); margin-bottom: 15px;"></i>
-            <h2>تم الشراء بنجاح!</h2>
-            <p style="color: var(--text-dim);">شكراً لثقتك بـ LEGACY STORE. تفاصيل طلبك:</p>
-            <div id="deliveries-container"></div>
-            <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('success-modal')">إغلاق</button>
+            <button class="cart-btn" style="width: 100%; margin-top: 20px; justify-content: center;" onclick="validateAndSubmit()">متابعة الشراء والدفع</button>
         </div>
     </div>
 
@@ -199,10 +187,10 @@
             <i class="fa-solid fa-paper-plane" style="font-size: 60px; color: var(--warning); margin-bottom: 15px;"></i>
             <h2>تم إرسال الطلب إلى فريق الدعم!</h2>
             <div class="pending-box">
-                <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم إرسال صورة التحويل ورقم المحول بنجاح.</p>
-                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم فريق الدعم الفني بمراجعة التحويل فوراً. فور قبول الطلب، سيتم إرسال الحساب لك مباشرة عبر الوسيلة المحددة.</p>
+                <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم إرسال بيانات الطلب وصورة التحويل بنجاح.</p>
+                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم فريق الدعم الفني بمراجعة التحويل وإرسال بيانات الحساب لك مباشرة فور التأكد.</p>
             </div>
-            <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('pending-modal')">فهمت ذلك</button>
+            <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('pending-modal')">حسناً</button>
         </div>
     </div>
 
@@ -212,7 +200,7 @@
             <i class="fa-solid fa-headset" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
             <h2>لوحة فريق الدعم</h2>
             <div class="input-group" style="margin-top:15px;">
-                <input type="password" id="admin-pass" placeholder="كلمه السر">
+                <input type="password" id="admin-pass" placeholder="كلمة السر">
             </div>
             <button class="cart-btn" style="width: 100%; justify-content: center;" onclick="checkAdminAuth()">دخول</button>
         </div>
@@ -238,7 +226,7 @@
                             <th>رقم الطلب</th>
                             <th>العميل</th>
                             <th>رقم التواصل</th>
-                            <th>الرقم المـحوّل منه</th>
+                            <th>طريقة الدفع / الرقم المحول</th>
                             <th>المنتجات</th>
                             <th>المبلغ</th>
                             <th>الإيصال</th>
@@ -253,8 +241,13 @@
     </div>
 
     <script>
-        // ضع رابط الدفع الخاص بـ XPay هنا بدلاً من الرابط الحالي
+        // رابط بوابة الفيزا
         const XPAY_PAYMENT_URL = "https://app.xpay.app/ar/acct_3NgXgLE728fwapZtIpPNU2";
+        // رابط الدفع الخاص بـ PayPal (يمكنك تغييره لحسابك المباشر)
+        const PAYPAL_PAYMENT_URL = "https://www.paypal.me/";
+
+        // كلمة سر لوحة الدعم الفني
+        const ADMIN_PASS = "legacy123";
 
         const products = {
             steam: [
@@ -267,9 +260,9 @@
                 { id: 202, name: "FiveM Executive Menu", prices: { day: 7, week: 20, month: 40, lifetime: 100 }, delivery: "Download Link: https://legacy-store.com/download/exec.exe | License: EXEC-8871-331", img: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=500" }
             ],
             accounts: [
-                { id: 301, name: "Fivem Bundel", price: 1, desc: "حزمة فايف ام كاملة شاملة الحسابات والتفعيل", delivery: "Rockstar: rock_bundle@gmail.com:Pass123! | Steam FA: steam_bundle@gmail.com:Pass123!", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=500" },
-                { id: 302, name: "Fivem Rockstar Account", price: 0.50, desc: "حساب روكستار جاهز للعب فايف ام فوراً", delivery: "Rockstar Account: rockstar_2026@gmail.com : Pass_3030!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
-                { id: 303, name: "FA Steam Account", price: 0.10, desc: "حساب ستيم الوصول الكامل Full Access", delivery: "Steam FA Mail: steam_fa@mail.com : Pass_FA_2026", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" }
+                { id: 301, name: "Fivem Bundel", price: 35, desc: "حزمة فايف ام كاملة شاملة الحسابات والتفعيل", delivery: "Rockstar: rock_bundle@gmail.com:Pass123! | Steam FA: steam_bundle@gmail.com:Pass123!", img: "https://images.unsplash.com/photo-1563089145-599997674d42?w=500" },
+                { id: 302, name: "Fivem Rockstar Account", price: 12, desc: "حساب روكستار جاهز للعب فايف ام فوراً", delivery: "Rockstar Account: rockstar_2026@gmail.com : Pass_3030!", img: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=500" },
+                { id: 303, name: "FA Steam Account", price: 20, desc: "حساب ستيم الوصول الكامل Full Access", delivery: "Steam FA Mail: steam_fa@mail.com : Pass_FA_2026", img: "https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500" }
             ]
         };
 
@@ -277,7 +270,6 @@
         let orders = [];
         let selectedPaymentMethod = '';
         let uploadedReceiptUrl = '';
-        const ADMIN_PASS = "legacy123";
 
         function initApp() {
             const steamGrid = document.getElementById('steam-grid');
@@ -287,7 +279,7 @@
                         <img src="${p.img}" class="card-img">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
-                            <div class="card-desc">لعبة ستيم أصلية تسليم فوري</div>
+                            <div class="card-desc">لعبة ستيم أصلية تسليم بعد الدفع</div>
                             <div class="card-footer">
                                 <span class="price">${p.price}$</span>
                                 <button class="buy-btn" onclick="addToCart('${p.name}', ${p.price}, '${p.delivery}')">إضافة للسلة</button>
@@ -390,7 +382,7 @@
             if (method === 'visa') {
                 container.innerHTML = `
                     <div style="background:rgba(0, 210, 255, 0.1); border:1px solid var(--primary-blue); padding:15px; border-radius:8px; margin:15px 0; text-align:center;">
-                        سيتم توجيهك بأمان إلى صفحة <b>XPay الرسمية</b> لتدخل بيانات الفيزا وتصلك رسالة الـ OTP الحقيقية من بنكك.
+                        سيتم توجيهك بأمان إلى صفحة <b>XPay الرسمية</b> لإكمال الدفع واستلام كود الـ OTP من بنكك.
                     </div>`;
             } else if (method === 'vodafone') {
                 container.innerHTML = `
@@ -405,8 +397,11 @@
                         <label style="color:var(--warning);">* إرفاق صورة إيصال التحويل (Screenshot)</label>
                         <input type="file" id="vodafone-receipt" accept="image/*" onchange="handleReceiptUpload(event)">
                     </div>`;
-            } else {
-                container.innerHTML = `<p style="text-align:center; padding:15px; color:var(--text-dim);">سيتم التحويل عبر PayPal الفوري.</p>`;
+            } else if (method === 'paypal') {
+                container.innerHTML = `
+                    <div style="background:rgba(0, 114, 255, 0.1); border:1px solid var(--secondary-blue); padding:15px; border-radius:8px; margin:15px 0; text-align:center;">
+                        سيتم توجيهك فوراً إلى صفحة <b>PayPal الرسمية</b> لإيداع الدفعة أولاً، وسيتم تفعيل وتسليم طلبتك عن طريق الدعم فور تأكيد عملية الدفع.
+                    </div>`;
             }
         }
 
@@ -423,21 +418,26 @@
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
             if (!name || !phone) return alert("من فضلك أدخل اسمك ورقم التواصل للتأكيد!");
-            if (!selectedPaymentMethod) return alert("اختر طريقة الدفع!");
+            if (!selectedPaymentMethod) return alert("اختر طريقة الدفع أولاً!");
 
             if (selectedPaymentMethod === 'visa') {
                 window.location.href = XPAY_PAYMENT_URL;
+            } else if (selectedPaymentMethod === 'paypal') {
+                // حفظ الطلب في لوحة التحكم مع الحالة Pending
+                saveOrderToDashboard('Pending', 'PayPal Direct');
+                // توجيه العميل فوراً لدفع بايبال بدون إظهار أو تسليم أي حساب
+                window.location.href = PAYPAL_PAYMENT_URL;
             } else if (selectedPaymentMethod === 'vodafone') {
                 const senderPhone = document.getElementById('sender-phone').value.trim();
                 if (!senderPhone) return alert("يرجى إدخال رقم الهاتف الذي قمت بالتحويل منه!");
                 if (!uploadedReceiptUrl) return alert("من فضلك أرفق صورة إيصال التحويل أولاً!");
-                completePurchase('Pending', senderPhone);
-            } else {
-                completePurchase('Approved', '-');
+                saveOrderToDashboard('Pending', senderPhone);
+                closeModal('checkout-modal');
+                document.getElementById('pending-modal').classList.add('active');
             }
         }
 
-        function completePurchase(initialStatus = 'Approved', senderPhone = '-') {
+        function saveOrderToDashboard(status, senderPhoneInfo) {
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
             let total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -446,44 +446,24 @@
                 id: Math.floor(100000 + Math.random() * 900000),
                 customer: name,
                 phone: phone,
-                senderPhone: senderPhone,
+                senderPhone: senderPhoneInfo,
                 items: cart.map(i => i.name).join(', '),
-                deliveries: cart.map(i => ({ name: i.name, del: i.delivery })),
                 total: total,
                 method: selectedPaymentMethod,
                 receipt: uploadedReceiptUrl,
-                status: initialStatus
+                status: status
             };
 
             orders.push(order);
             cart = [];
             updateCartUI();
-            closeModal('checkout-modal');
-
-            if (initialStatus === 'Approved') {
-                renderSuccessDelivery(order);
-            } else {
-                document.getElementById('pending-modal').classList.add('active');
-            }
             uploadedReceiptUrl = '';
-        }
-
-        function renderSuccessDelivery(order) {
-            const container = document.getElementById('deliveries-container');
-            container.innerHTML = '';
-            order.deliveries.forEach(d => {
-                container.innerHTML += `
-                    <div class="success-box">
-                        <strong>${d.name}</strong>
-                        <div class="item-key">${d.del}</div>
-                    </div>`;
-            });
-            document.getElementById('success-modal').classList.add('active');
         }
 
         function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
         function checkAdminAuth() {
-            if (document.getElementById('admin-pass').value === ADMIN_PASS) {SASA2010
+            const enteredPass = document.getElementById('admin-pass').value.trim();
+            if (enteredPass === ADMIN_PASS) {
                 closeModal('admin-auth-modal');
                 renderAdminDashboard();
                 document.getElementById('admin-modal').classList.add('active');
@@ -505,7 +485,7 @@
                 let statusBadge = `<span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>`;
                 let receiptImg = o.receipt ? `<img src="${o.receipt}" class="receipt-preview" onclick="window.open('${o.receipt}')">` : '-';
                 let actions = o.status === 'Pending' ? `
-                    <button class="action-btn btn-approve" onclick="approveOrder(${index})">قبول</button>
+                    <button class="action-btn btn-approve" onclick="approveOrder(${index})">قبول وتأكيد</button>
                     <button class="action-btn btn-reject" onclick="rejectOrder(${index})">رفض</button>
                 ` : '-';
 
