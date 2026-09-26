@@ -27,7 +27,7 @@
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         header { background: rgba(8, 10, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; flex-wrap: wrap; gap: 15px; }
+        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
         .logo { font-size: 28px; font-weight: 900; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 12px var(--accent-glow); }
         .logo span { color: var(--primary-blue); }
         .nav-links { display: flex; list-style: none; gap: 25px; }
@@ -52,7 +52,7 @@
         .card-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border-color); }
         .card-body { padding: 20px; }
         .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-        .card-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 15px; min-height: 40px; }
+        .card-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 15px; height: 40px; }
         
         .duration-select { width: 100%; padding: 10px; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: var(--text-light); border-radius: 6px; margin-bottom: 15px; outline: none; }
         .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
@@ -60,13 +60,12 @@
         .buy-btn { background: transparent; border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; transition: 0.3s; }
         .buy-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 15px; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; }
         .modal.active { display: flex; }
-        .modal-content { background: #0f141f; border: 1px solid var(--border-color); width: 100%; max-width: 650px; border-radius: 15px; padding: 30px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 35px var(--accent-glow); }
-        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 24px; cursor: pointer; color: var(--text-dim); transition: 0.2s; }
-        .close-modal:hover { color: var(--danger); }
+        .modal-content { background: #0f141f; border: 1px solid var(--border-color); width: 90%; max-width: 650px; border-radius: 15px; padding: 30px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 35px var(--accent-glow); }
+        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 24px; cursor: pointer; color: var(--text-dim); }
 
-        .payment-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; }
+        .payment-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
         .pay-option { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 15px; border-radius: 10px; cursor: pointer; text-align: center; transition: 0.3s; }
         .pay-option.selected { border-color: var(--primary-blue); background: rgba(0, 210, 255, 0.1); }
         
@@ -75,7 +74,7 @@
         .input-group input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); outline: none; }
         .input-group input:focus { border-color: var(--primary-blue); }
 
-        .admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .admin-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
         .stat-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 15px; border-radius: 10px; text-align: center; }
         .stat-card h3 { font-size: 24px; color: var(--primary-blue); }
         
@@ -95,16 +94,11 @@
         .success-box { background: rgba(46, 213, 115, 0.1); border: 1px solid var(--success); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .pending-box { background: rgba(255, 165, 0, 0.1); border: 1px solid var(--warning); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .item-key { font-family: monospace; background: #000; padding: 10px; border-radius: 5px; border: 1px dashed var(--primary-blue); color: var(--primary-blue); margin-top: 10px; word-break: break-all; }
-        .receipt-preview { width: 45px; height: 45px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 1px solid var(--primary-blue); }
-
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; text-align: center; }
-            .hero h1 { font-size: 32px; }
-            .hero { padding: 30px 15px; }
-        }
+        .receipt-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 1px solid var(--primary-blue); }
     </style>
 </head>
 <body>
+
     <canvas id="bg-canvas"></canvas>
 
     <header>
@@ -125,7 +119,7 @@
     <div class="container">
         <div class="hero">
             <h1>LEGACY STORE</h1>
-            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام تلقائي فوري وبوابة دفع آمنة عبر XPay!</p>
+            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام تلقائي فوري أو عن طريق الدعم!</p>
         </div>
 
         <h2 class="section-title" id="steam"><i class="fa-brands fa-steam"></i> ألعاب Steam</h2>
@@ -169,9 +163,9 @@
 
             <p style="margin-top: 15px; color: var(--text-dim);">اختر طريقة الدفع المناسبة:</p>
             <div class="payment-options">
-                <div class="pay-option" onclick="selectPayment('xpay', this)">
+                <div class="pay-option" onclick="selectPayment('visa', this)">
                     <i class="fa-brands fa-cc-visa"></i>
-                    <div>فيزا / ماستر كارد (XPay)</div>
+                    <div>فيزا / ماستر كارد</div>
                 </div>
                 <div class="pay-option" onclick="selectPayment('vodafone', this)">
                     <i class="fa-solid fa-mobile-screen-button"></i>
@@ -206,7 +200,7 @@
             <h2>تم إرسال الطلب إلى فريق الدعم!</h2>
             <div class="pending-box">
                 <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم إرسال صورة التحويل ورقم المحول بنجاح.</p>
-                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم فريق الدعم الفني بمراجعة التحويل فوراً. فور قبول الطلب، سيتم إرسال البيانات لك مباشرة.</p>
+                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم فريق الدعم الفني بمراجعة التحويل فوراً. فور قبول الطلب، سيتم إرسال الحساب لك مباشرة عبر الوسيلة المحددة.</p>
             </div>
             <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('pending-modal')">فهمت ذلك</button>
         </div>
@@ -217,8 +211,8 @@
         <div class="modal-content" style="max-width: 400px; text-align: center;">
             <i class="fa-solid fa-headset" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
             <h2>لوحة فريق الدعم</h2>
-            <div class="input-group">
-                <input type="password" id="admin-pass" placeholder="كلمة السر (legacy123)">
+            <div class="input-group" style="margin-top:15px;">
+                <input type="password" id="admin-pass" placeholder="كلمة السر">
             </div>
             <button class="cart-btn" style="width: 100%; justify-content: center;" onclick="checkAdminAuth()">دخول</button>
         </div>
@@ -259,14 +253,14 @@
     </div>
 
     <script>
-        // Store Products Catalog Data
+        // ضع رابط الدفع الخاص بـ XPay هنا بدلاً من الرابط الحالي
+        const XPAY_PAYMENT_URL = "https://app.xpay.app/ar/acct_3NgXgLE728fwapZtIpPNU2";
+
         const products = {
             steam: [
                 { id: 101, name: "GTA V Premium", price: 15, delivery: "Steam Account: gta_user_99 : Pass_2026! | Backup Code: 887211", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
                 { id: 102, name: "Cyberpunk 2077", price: 30, delivery: "Key: CYBER-9981-X772-L990", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
                 { id: 103, name: "Red Dead Redemption 2", price: 25, delivery: "Key: RDR2-9011-8821-MM00", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" }
-                { id: 104, name: "Cyberpunk 2077", price: 40, delivery: "Key: CYBER-9981-X772-L990", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
-
             ],
             fivem: [
                 { id: 201, name: "FiveM Mod Menu (VIP)", prices: { day: 5, week: 15, month: 30, lifetime: 80 }, delivery: "Download Link: https://legacy-store.com/download/modmenu.exe | License: VIP-KEY-998", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
@@ -279,9 +273,6 @@
             ]
         };
 
-        // Put your Real XPay Link / Portal URL here
-        const XPAY_PAYMENT_URL = "https://app.xpay.app/ar/acct_3NgXgLE728fwapZtlpPNU2"; 
-
         let cart = [];
         let orders = [];
         let selectedPaymentMethod = '';
@@ -293,7 +284,7 @@
             products.steam.forEach(p => {
                 steamGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img" alt="${p.name}">
+                        <img src="${p.img}" class="card-img">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <div class="card-desc">لعبة ستيم أصلية تسليم فوري</div>
@@ -309,7 +300,7 @@
             products.fivem.forEach(p => {
                 fivemGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img" alt="${p.name}">
+                        <img src="${p.img}" class="card-img">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <select class="duration-select" id="dur-${p.id}" onchange="updateHackPrice(${p.id})">
@@ -330,7 +321,7 @@
             products.accounts.forEach(p => {
                 accountsGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img" alt="${p.name}">
+                        <img src="${p.img}" class="card-img">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <div class="card-desc">${p.desc}</div>
@@ -341,7 +332,6 @@
                         </div>
                     </div>`;
             });
-            initCanvas();
         }
 
         function updateHackPrice(id) {
@@ -397,12 +387,10 @@
             el.classList.add('selected');
 
             const container = document.getElementById('payment-details');
-            if (method === 'xpay') {
+            if (method === 'visa') {
                 container.innerHTML = `
                     <div style="background:rgba(0, 210, 255, 0.1); border:1px solid var(--primary-blue); padding:15px; border-radius:8px; margin:15px 0; text-align:center;">
-                        <i class="fa-solid fa-shield-halved" style="font-size:30px; color:var(--primary-blue); margin-bottom:10px;"></i>
-                        <p style="font-weight:bold; color:#fff;">دفع آمن 100% عبر بوابة XPay المعترف بها</p>
-                        <p style="font-size:12px; color:var(--text-dim); margin-top:5px;">سيتم توجيهك إلى صفحة الدفع الرسمية لاستكمال العملية بأمان.</p>
+                        سيتم توجيهك بأمان إلى صفحة <b>XPay الرسمية</b> لتدخل بيانات الفيزا وتصلك رسالة الـ OTP الحقيقية من بنكك.
                     </div>`;
             } else if (method === 'vodafone') {
                 container.innerHTML = `
@@ -411,7 +399,7 @@
                     </div>
                     <div class="input-group">
                         <label style="color:var(--warning);">* رقم الهاتف المحول منه</label>
-                        <input type="text" id="sender-phone" placeholder="أدخل الرقم الذي قمت بالتحويل منه (010/011/012/015)">
+                        <input type="text" id="sender-phone" placeholder="أدخل الرقم الذي قمت بالتحويل منه">
                     </div>
                     <div class="input-group">
                         <label style="color:var(--warning);">* إرفاق صورة إيصال التحويل (Screenshot)</label>
@@ -437,9 +425,8 @@
             if (!name || !phone) return alert("من فضلك أدخل اسمك ورقم التواصل للتأكيد!");
             if (!selectedPaymentMethod) return alert("اختر طريقة الدفع!");
 
-            if (selectedPaymentMethod === 'xpay') {
-                window.open(XPAY_PAYMENT_URL, '_blank');
-                completePurchase('Approved', '-');
+            if (selectedPaymentMethod === 'visa') {
+                window.location.href = XPAY_PAYMENT_URL;
             } else if (selectedPaymentMethod === 'vodafone') {
                 const senderPhone = document.getElementById('sender-phone').value.trim();
                 if (!senderPhone) return alert("يرجى إدخال رقم الهاتف الذي قمت بالتحويل منه!");
@@ -479,7 +466,6 @@
                 document.getElementById('pending-modal').classList.add('active');
             }
             uploadedReceiptUrl = '';
-            updateAdminDashboard();
         }
 
         function renderSuccessDelivery(order) {
@@ -496,104 +482,54 @@
         }
 
         function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
-        
         function checkAdminAuth() {
-            if (document.getElementById('admin-pass').value === ADMIN_PASS) {SASA2010
+            if (document.getElementById('admin-pass').value === ADMIN_PASS) {
                 closeModal('admin-auth-modal');
-                updateAdminDashboard();
+                renderAdminDashboard();
                 document.getElementById('admin-modal').classList.add('active');
             } else {
                 alert("كلمة السر خاطئة!");
             }
         }
 
-        function updateAdminDashboard() {
-            const revenue = orders.filter(o => o.status === 'Approved').reduce((sum, o) => sum + o.total, 0);
-            const pendingCount = orders.filter(o => o.status === 'Pending').length;
-
-            document.getElementById('stat-revenue').innerText = `${revenue}$`;
-            document.getElementById('stat-orders').innerText = orders.length;
-            document.getElementById('stat-pending').innerText = pendingCount;
-
-            const tbody = document.getElementById('admin-orders-table');
-            tbody.innerHTML = '';
+        function renderAdminDashboard() {
+            const table = document.getElementById('admin-orders-table');
+            table.innerHTML = '';
+            let totalRev = 0;
+            let pendingCount = 0;
 
             orders.forEach((o, index) => {
-                let badgeClass = o.status === 'Approved' ? 'status-approved' : (o.status === 'Pending' ? 'status-pending' : 'status-rejected');
-                let receiptImg = o.receipt ? `<img src="${o.receipt}" class="receipt-preview" onclick="window.open('${o.receipt}')" alt="Receipt">` : '-';
-                
-                tbody.innerHTML += `
+                if (o.status === 'Approved') totalRev += o.total;
+                if (o.status === 'Pending') pendingCount++;
+
+                let statusBadge = `<span class="status-badge status-${o.status.toLowerCase()}">${o.status}</span>`;
+                let receiptImg = o.receipt ? `<img src="${o.receipt}" class="receipt-preview" onclick="window.open('${o.receipt}')">` : '-';
+                let actions = o.status === 'Pending' ? `
+                    <button class="action-btn btn-approve" onclick="approveOrder(${index})">قبول</button>
+                    <button class="action-btn btn-reject" onclick="rejectOrder(${index})">رفض</button>
+                ` : '-';
+
+                table.innerHTML += `
                     <tr>
                         <td>#${o.id}</td>
                         <td>${o.customer}</td>
                         <td>${o.phone}</td>
                         <td>${o.senderPhone}</td>
                         <td>${o.items}</td>
-                        <td style="color:var(--primary-blue); font-weight:bold;">${o.total}$</td>
+                        <td>${o.total}$</td>
                         <td>${receiptImg}</td>
-                        <td><span class="status-badge ${badgeClass}">${o.status}</span></td>
-                        <td>
-                            ${o.status === 'Pending' ? `
-                                <button class="action-btn btn-approve" onclick="approveOrder(${index})">قبول</button>
-                                <button class="action-btn btn-reject" onclick="rejectOrder(${index})">رفض</button>
-                            ` : '-'}
-                        </td>
+                        <td>${statusBadge}</td>
+                        <td>${actions}</td>
                     </tr>`;
             });
+
+            document.getElementById('stat-revenue').innerText = `${totalRev}$`;
+            document.getElementById('stat-orders').innerText = orders.length;
+            document.getElementById('stat-pending').innerText = pendingCount;
         }
 
-        function approveOrder(index) {
-            orders[index].status = 'Approved';
-            updateAdminDashboard();
-            alert(`تم قبول الطلب #${orders[index].id} بنجاح وتسليم العميل!`);
-        }
-
-        function rejectOrder(index) {
-            orders[index].status = 'Rejected';
-            updateAdminDashboard();
-            alert(`تم رفض الطلب #${orders[index].id}`);
-        }
-
-        function initCanvas() {
-            const canvas = document.getElementById('bg-canvas');
-            const ctx = canvas.getContext('2d');
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            resizeCanvas();
-            window.addEventListener('resize', resizeCanvas);
-
-            let particles = [];
-            for (let i = 0; i < 60; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1,
-                    vx: (Math.random() - 0.5) * 0.5,
-                    vy: (Math.random() - 0.5) * 0.5
-                });
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                ctx.fillStyle = 'rgba(0, 210, 255, 0.4)';
-                particles.forEach(p => {
-                    ctx.beginPath();
-                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                    ctx.fill();
-                    p.x += p.vx;
-                    p.y += p.vy;
-
-                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                });
-                requestAnimationFrame(animate);
-            }
-            animate();
-        }
+        function approveOrder(index) { orders[index].status = 'Approved'; renderAdminDashboard(); }
+        function rejectOrder(index) { orders[index].status = 'Rejected'; renderAdminDashboard(); }
 
         window.onload = initApp;
     </script>
