@@ -3,67 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LEGACY-STOR | متجر الألعاب المجانية</title>
+    <title>LEGACY-STOR | متجر الألعاب</title>
     <style>
-        :root {
-            --bg-dark: #0f172a;
-            --card-bg: #1e293b;
-            --accent-purple: #8b5cf6;
-            --accent-green: #10b981;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
 
-        /* الهيدر وشعار المتجر */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0b0e14;
+            color: #e2e8f0;
+            padding-bottom: 50px;
+        }
+
+        /* الهيدر */
         header {
-            background-color: #1e1b4b;
-            padding: 20px 5%;
+            background: #111827;
+            padding: 20px 8%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid var(--accent-purple);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            border-bottom: 2px solid #6366f1;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
 
         .logo {
-            font-size: 26px;
+            font-size: 28px;
             font-weight: 900;
-            letter-spacing: 1px;
             color: #fff;
+            letter-spacing: 1px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .logo span {
-            color: var(--accent-purple);
-        }
+        .logo span { color: #6366f1; }
 
-        /* البانر الترحيبي */
+        /* البانر */
         .hero {
-            background: linear-gradient(180deg, #1e1b4b 0%, var(--bg-dark) 100%);
-            padding: 50px 20px;
+            background: linear-gradient(180deg, #1e1b4b 0%, #0b0e14 100%);
+            padding: 60px 20px;
             text-align: center;
         }
 
         .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
+            font-size: 3rem;
             color: #fff;
+            margin-bottom: 12px;
+            text-shadow: 0 2px 10px rgba(99, 102, 241, 0.3);
         }
 
         .hero p {
-            color: var(--accent-purple);
+            color: #a5b4fc;
             font-size: 1.2rem;
-            font-weight: 500;
         }
 
         /* حاوية الألعاب */
@@ -74,179 +68,168 @@
         }
 
         .section-title {
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            border-right: 5px solid var(--accent-purple);
-            padding-right: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             color: #fff;
+            border-right: 5px solid #6366f1;
+            padding-right: 15px;
         }
 
-        /* شبكة عرض الألعاب */
+        /* شبكة الألعاب */
         .games-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 25px;
         }
 
-        /* بطاقات الألعاب */
         .game-card {
-            background-color: var(--card-bg);
+            background: #151d2a;
             border-radius: 12px;
             overflow: hidden;
-            border: 1px solid #334155;
+            border: 1px solid #1e293b;
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
         }
 
         .game-card:hover {
-            transform: translateY(-7px);
-            border-color: var(--accent-purple);
-            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.25);
+            transform: translateY(-8px);
+            border-color: #6366f1;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.25);
         }
 
         .game-img {
             width: 100%;
-            height: 180px;
+            height: 170px;
             object-fit: cover;
         }
 
-        .game-details {
-            padding: 20px;
+        .game-info {
+            padding: 18px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
-        .game-name {
-            font-size: 1.3rem;
-            margin: 0 0 10px 0;
+        .game-title {
+            font-size: 1.25rem;
             color: #fff;
+            margin-bottom: 8px;
         }
 
         .game-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
+            font-size: 0.88rem;
+            color: #94a3b8;
             line-height: 1.5;
             margin-bottom: 20px;
             flex: 1;
         }
 
-        .game-bottom {
+        .game-footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #334155;
-            padding-top: 15px;
-            margin-top: auto;
+            border-top: 1px solid #1e293b;
+            padding-top: 12px;
         }
 
-        .price-tag {
-            background-color: rgba(16, 185, 129, 0.15);
-            color: var(--accent-green);
-            padding: 6px 12px;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            border: 1px solid var(--accent-green);
-        }
-
-        .download-btn {
-            background-color: var(--accent-purple);
-            color: #fff;
-            text-decoration: none;
-            padding: 8px 18px;
+        .price {
+            background: rgba(16, 185, 129, 0.15);
+            color: #10b981;
+            border: 1px solid #10b981;
+            padding: 5px 10px;
             border-radius: 6px;
             font-weight: bold;
             font-size: 0.95rem;
-            transition: 0.2s;
         }
 
-        .download-btn:hover {
-            background-color: #7c3aed;
+        .btn-download {
+            background: #6366f1;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: background 0.2s;
         }
 
-        /* الفوتر */
+        .btn-download:hover {
+            background: #4f46e5;
+        }
+
         footer {
             text-align: center;
-            padding: 25px;
-            background-color: #090d16;
-            border-top: 1px solid #1e293b;
-            color: var(--text-muted);
-            font-size: 0.9rem;
             margin-top: 60px;
+            color: #64748b;
+            font-size: 0.9rem;
         }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر -->
     <header>
-        <div class="logo">
-            <span>🎮</span> LEGACY-STOR
-        </div>
+        <div class="logo">🎮 LEGACY-<span>STOR</span></div>
     </header>
 
-    <!-- البانر -->
     <div class="hero">
-        <h1>مرحباً بك في متجر LEGACY-STOR</h1>
-        <p>مكتبة أفضل الألعاب المجانية جاهزة للتحميل واللعب فوراً!</p>
+        <h1>مرحباً بك في LEGACY-STOR</h1>
+        <p>حمل أحدث وأقوى الألعاب المجانية بنقرة واحدة</p>
     </div>
 
-    <!-- شبكة الألعاب -->
     <div class="container">
-        <h2 class="section-title">قائمة الألعاب المتاحة (مجاناً)</h2>
-
+        <h2 class="section-title">قائمة الألعاب المتاحة</h2>
+        
         <div class="games-grid">
 
             <!-- لعبة 1 -->
             <div class="game-card">
-                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" alt="Counter-Strike 2" class="game-img">
-                <div class="game-details">
-                    <h3 class="game-name">Counter-Strike 2</h3>
-                    <p class="game-desc">أقوى لعبة تصويب تنافسية وجماعية بأسلوب تكتيكي وسريع.</p>
-                    <div class="game-bottom">
-                        <span class="price-tag">0.00$ (مجاناً)</span>
-                        <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank" class="download-btn">تحميل اللعبة</a>
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80" class="game-img" alt="Counter Strike 2">
+                <div class="game-info">
+                    <h3 class="game-title">Counter-Strike 2</h3>
+                    <p class="game-desc">أقوى لعبة تصويب تنافسية أونلاين بأسلوب تكتيكي وسريع.</p>
+                    <div class="game-footer">
+                        <span class="price">0.00$ مجاناً</span>
+                        <a href="https://store.steampowered.com/app/730/CounterStrike_2/" target="_blank" class="btn-download">تحميل</a>
                     </div>
                 </div>
             </div>
 
             <!-- لعبة 2 -->
             <div class="game-card">
-                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" alt="Dota 2" class="game-img">
-                <div class="game-details">
-                    <h3 class="game-name">Dota 2</h3>
-                    <p class="game-desc">لعبة المعارك الاستراتيجية الملحمية بين الأبطال أونلاين.</p>
-                    <div class="game-bottom">
-                        <span class="price-tag">0.00$ (مجاناً)</span>
-                        <a href="https://store.steampowered.com/app/570/Dota_2/" target="_blank" class="download-btn">تحميل اللعبة</a>
+                <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80" class="game-img" alt="Dota 2">
+                <div class="game-info">
+                    <h3 class="game-title">Dota 2</h3>
+                    <p class="game-desc">لعبة الاستراتيجية والمعارك الملحمية بين الأبطال.</p>
+                    <div class="game-footer">
+                        <span class="price">0.00$ مجاناً</span>
+                        <a href="https://store.steampowered.com/app/570/Dota_2/" target="_blank" class="btn-download">تحميل</a>
                     </div>
                 </div>
             </div>
 
             <!-- لعبة 3 -->
             <div class="game-card">
-                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" alt="Apex Legends" class="game-img">
-                <div class="game-details">
-                    <h3 class="game-name">Apex Legends</h3>
-                    <p class="game-desc">لعبة باتل رويال المستقبلية مع شخصيات بقدرات خاصة وخارقة.</p>
-                    <div class="game-bottom">
-                        <span class="price-tag">0.00$ (مجاناً)</span>
-                        <a href="https://store.steampowered.com/app/1172470/Apex_Legends/" target="_blank" class="download-btn">تحميل اللعبة</a>
+                <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=600&q=80" class="game-img" alt="Apex Legends">
+                <div class="game-info">
+                    <h3 class="game-title">Apex Legends</h3>
+                    <p class="game-desc">لعبة باتل رويال المستقبلية مع شخصيات بقدرات خارقة.</p>
+                    <div class="game-footer">
+                        <span class="price">0.00$ مجاناً</span>
+                        <a href="https://store.steampowered.com/app/1172470/Apex_Legends/" target="_blank" class="btn-download">تحميل</a>
                     </div>
                 </div>
             </div>
 
             <!-- لعبة 4 -->
             <div class="game-card">
-                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" alt="PUBG: BATTLEGROUNDS" class="game-img">
-                <div class="game-details">
-                    <h3 class="game-name">PUBG: BATTLEGROUNDS</h3>
-                    <p class="game-desc">لعبة الباتل رويال الشهيرة، انزل للخريطة وكن الناجي الأخير.</p>
-                    <div class="game-bottom">
-                        <span class="price-tag">0.00$ (مجاناً)</span>
-                        <a href="https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS/" target="_blank" class="download-btn">تحميل اللعبة</a>
+                <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80" class="game-img" alt="PUBG">
+                <div class="game-info">
+                    <h3 class="game-title">PUBG: BATTLEGROUNDS</h3>
+                    <p class="game-desc">لعبة الباتل رويال الشهيرة، انزل وكن الناجي الأخير.</p>
+                    <div class="game-footer">
+                        <span class="price">0.00$ مجاناً</span>
+                        <a href="https://store.steampowered.com/app/578080/PUBG_BATTLEGROUNDS/" target="_blank" class="btn-download">تحميل</a>
                     </div>
                 </div>
             </div>
@@ -254,10 +237,7 @@
         </div>
     </div>
 
-    <!-- الفوتر -->
-    <footer>
-        جميع الحقوق محفوظة © 2026 - متجر <strong>LEGACY-STOR</strong>
-    </footer>
+    <footer>جميع الحقوق محفوظة © 2026 - LEGACY-STOR</footer>
 
 </body>
 </html>
