@@ -18,6 +18,7 @@
             --text-dim: #8b949e;
             --border-color: rgba(0, 210, 255, 0.25);
             --danger: #ff4757;
+            --warning: #ffa502;
             --success: #2ed573;
         }
 
@@ -81,7 +82,17 @@
         th, td { padding: 12px; text-align: right; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
         th { color: var(--primary-blue); }
 
+        .status-badge { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .status-pending { background: rgba(255, 165, 0, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+        .status-approved { background: rgba(46, 213, 115, 0.2); color: var(--success); border: 1px solid var(--success); }
+        .status-rejected { background: rgba(255, 71, 87, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+
+        .action-btn { padding: 5px 10px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; font-size: 12px; margin-left: 5px; }
+        .btn-approve { background: var(--success); color: #000; }
+        .btn-reject { background: var(--danger); color: #fff; }
+
         .success-box { background: rgba(46, 213, 115, 0.1); border: 1px solid var(--success); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
+        .pending-box { background: rgba(255, 165, 0, 0.1); border: 1px solid var(--warning); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .item-key { font-family: monospace; background: #000; padding: 10px; border-radius: 5px; border: 1px dashed var(--primary-blue); color: var(--primary-blue); margin-top: 10px; word-break: break-all; }
     </style>
 </head>
@@ -194,6 +205,19 @@
         </div>
     </div>
 
+    <!-- Pending Approval Modal (Vodafone Cash) -->
+    <div class="modal" id="pending-modal">
+        <div class="modal-content" style="text-align: center;">
+            <i class="fa-solid fa-clock" style="font-size: 60px; color: var(--warning); margin-bottom: 15px;"></i>
+            <h2>طلبك قيد المراجعه!</h2>
+            <div class="pending-box">
+                <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم استلام صورة إيصال التحويل بنجاح.</p>
+                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم أحد مشرفي الدعم الفني بمراجعة التحويل وتأكيده خلال دقائق. سيتم التواصل معك عبر رقم هاتف/حساب التواصل المرفق لإرسال الحساب.</p>
+            </div>
+            <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('pending-modal')">فهمت ذلك</button>
+        </div>
+    </div>
+
     <!-- Admin Auth -->
     <div class="modal" id="admin-auth-modal">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
@@ -208,14 +232,14 @@
 
     <!-- Admin Dashboard -->
     <div class="modal" id="admin-modal">
-        <div class="modal-content" style="max-width: 950px;">
+        <div class="modal-content" style="max-width: 1000px;">
             <i class="fa-solid fa-xmark close-modal" onclick="closeModal('admin-modal')"></i>
             <h2>لوحة تحكم الأدمن <i class="fa-solid fa-user-shield"></i></h2>
             
             <div class="admin-stats" style="margin-top:20px;">
-                <div class="stat-card"><p style="color:var(--text-dim);">إجمالي المبيعات</p><h3 id="stat-revenue">0$</h3></div>
+                <div class="stat-card"><p style="color:var(--text-dim);">إجمالي المبيعات المؤكدة</p><h3 id="stat-revenue">0$</h3></div>
                 <div class="stat-card"><p style="color:var(--text-dim);">عدد الطلبات</p><h3 id="stat-orders">0</h3></div>
-                <div class="stat-card"><p style="color:var(--text-dim);">المنتج الأكثر مبيعاً</p><h3 id="stat-top" style="font-size:16px;">-</h3></div>
+                <div class="stat-card"><p style="color:var(--text-dim);">الطلبات قيد الانتظار</p><h3 id="stat-pending" style="color:var(--warning);">0</h3></div>
             </div>
 
             <h3><i class="fa-solid fa-list"></i> سجل الطلبات والتواصل مع العملاء</h3>
@@ -226,9 +250,12 @@
                             <th>رقم الطلب</th>
                             <th>العميل</th>
                             <th>رقم التواصل</th>
-                            <th>المنتجات المستلمة</th>
+                            <th>المنتجات</th>
                             <th>المبلغ</th>
                             <th>طريقة الدفع</th>
+                            <th>الإيصال</th>
+                            <th>الحالة</th>
+                            <th>إجراء</th>
                         </tr>
                     </thead>
                     <tbody id="admin-orders-table"></tbody>
@@ -260,6 +287,7 @@
         let orders = [];
         let selectedPaymentMethod = '';
         let generatedOTP = '';
+        let uploadedReceiptUrl = '';
         const ADMIN_PASS = "legacy123";
 
         function initApp() {
@@ -390,9 +418,24 @@
                 container.innerHTML = `
                     <div style="background:rgba(46, 213, 115, 0.1); border:1px solid var(--success); padding:15px; border-radius:8px; margin:15px 0; text-align:center;">
                         حول المبلغ إلى الرقم: <div style="font-size:24px; font-weight:bold; color:var(--success);">01064678474</div>
+                    </div>
+                    <div class="input-group">
+                        <label>إرفاق صورة إيصال التحويل (Screenshot)</label>
+                        <input type="file" id="vodafone-receipt" accept="image/*" onchange="handleReceiptUpload(event)">
                     </div>`;
             } else {
                 container.innerHTML = `<p style="text-align:center; padding:15px; color:var(--text-dim);">سيتم التحويل عبر PayPal الفوري.</p>`;
+            }
+        }
+
+        function handleReceiptUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedReceiptUrl = e.target.result;
+                };
+                reader.readAsDataURL(file);
             }
         }
 
@@ -432,8 +475,11 @@
                 
                 closeModal('checkout-modal');
                 document.getElementById('otp-modal').classList.add('active');
+            } else if (selectedPaymentMethod === 'vodafone') {
+                if (!uploadedReceiptUrl) return alert("من فضلك أرفق صورة إيصال التحويل أولاً!");
+                completePurchase('Pending');
             } else {
-                completePurchase();
+                completePurchase('Approved');
             }
         }
 
@@ -441,13 +487,13 @@
             const inputOTP = document.getElementById('otp-input').value;
             if (inputOTP === generatedOTP) {
                 closeModal('otp-modal');
-                completePurchase();
+                completePurchase('Approved');
             } else {
                 alert("رمز OTP خاطئ! حاول مجدداً.");
             }
         }
 
-        function completePurchase() {
+        function completePurchase(initialStatus = 'Approved') {
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
             let total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -459,26 +505,33 @@
                 items: cart.map(i => i.name).join(', '),
                 deliveries: cart.map(i => ({ name: i.name, del: i.delivery })),
                 total: total,
-                method: selectedPaymentMethod
+                method: selectedPaymentMethod,
+                receipt: uploadedReceiptUrl,
+                status: initialStatus // Approved, Pending, Rejected
             };
 
             orders.push(order);
-
-            // Display Instant Delivery to Client
-            const container = document.getElementById('deliveries-container');
-            container.innerHTML = '';
-            order.deliveries.forEach(d => {
-                container.innerHTML += `
-                    <div class="success-box">
-                        <strong>${d.name}</strong>
-                        <div class="item-key">${d.del}</div>
-                    </div>`;
-            });
-
             cart = [];
             updateCartUI();
             closeModal('checkout-modal');
-            document.getElementById('success-modal').classList.add('active');
+
+            if (initialStatus === 'Approved') {
+                // Display Instant Delivery to Client
+                const container = document.getElementById('deliveries-container');
+                container.innerHTML = '';
+                order.deliveries.forEach(d => {
+                    container.innerHTML += `
+                        <div class="success-box">
+                            <strong>${d.name}</strong>
+                            <div class="item-key">${d.del}</div>
+                        </div>`;
+                });
+                document.getElementById('success-modal').classList.add('active');
+            } else {
+                // Show Pending Modal for Vodafone Cash
+                document.getElementById('pending-modal').classList.add('active');
+            }
+            uploadedReceiptUrl = '';
         }
 
         function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
@@ -491,13 +544,32 @@
 
         function openAdmin() {
             document.getElementById('admin-modal').classList.add('active');
-            let totalRevenue = orders.reduce((sum, o) => sum + o.total, 0);
+            
+            let totalRevenue = orders.filter(o => o.status === 'Approved').reduce((sum, o) => sum + o.total, 0);
+            let pendingCount = orders.filter(o => o.status === 'Pending').length;
+
             document.getElementById('stat-revenue').innerText = `${totalRevenue}$`;
             document.getElementById('stat-orders').innerText = orders.length;
+            document.getElementById('stat-pending').innerText = pendingCount;
 
             const table = document.getElementById('admin-orders-table');
             table.innerHTML = '';
             orders.forEach(o => {
+                let receiptTd = o.receipt ? `<a href="${o.receipt}" target="_blank" style="color:var(--primary-blue);">عرض الإيصال</a>` : '-';
+                
+                let statusClass = 'status-pending';
+                let statusText = 'قيد الانتظار';
+                if (o.status === 'Approved') { statusClass = 'status-approved'; statusText = 'مقبول'; }
+                if (o.status === 'Rejected') { statusClass = 'status-rejected'; statusText = 'مرفوض'; }
+
+                let actionBtns = '-';
+                if (o.status === 'Pending') {
+                    actionBtns = `
+                        <button class="action-btn btn-approve" onclick="approveOrder(${o.id})">موافقة</button>
+                        <button class="action-btn btn-reject" onclick="rejectOrder(${o.id})">رفض</button>
+                    `;
+                }
+
                 table.innerHTML += `
                     <tr>
                         <td>#${o.id}</td>
@@ -506,8 +578,29 @@
                         <td style="font-size:11px;">${o.items}</td>
                         <td style="color:var(--success); font-weight:bold;">${o.total}$</td>
                         <td>${o.method}</td>
+                        <td>${receiptTd}</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>${actionBtns}</td>
                     </tr>`;
             });
+        }
+
+        function approveOrder(orderId) {
+            let order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = 'Approved';
+                alert(`تم القبول! البيانات الخاصة بالطلب المشتري هي:\n\n${order.deliveries.map(d => d.name + ':\n' + d.del).join('\n\n')}\n\nقم بنسخ البيانات وإرسالها للعميل عبر رقم التواصل الخاص به.`);
+                openAdmin();
+            }
+        }
+
+        function rejectOrder(orderId) {
+            let order = orders.find(o => o.id === orderId);
+            if (order) {
+                order.status = 'Rejected';
+                alert("تم رفض الطلب.");
+                openAdmin();
+            }
         }
 
         // Canvas Effect
