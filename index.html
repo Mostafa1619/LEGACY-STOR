@@ -27,7 +27,7 @@
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         header { background: rgba(8, 10, 15, 0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; }
+        .nav-container { max-width: 1300px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; flex-wrap: wrap; gap: 15px; }
         .logo { font-size: 28px; font-weight: 900; color: var(--text-light); text-decoration: none; display: flex; align-items: center; gap: 10px; text-shadow: 0 0 12px var(--accent-glow); }
         .logo span { color: var(--primary-blue); }
         .nav-links { display: flex; list-style: none; gap: 25px; }
@@ -52,7 +52,7 @@
         .card-img { width: 100%; height: 180px; object-fit: cover; border-bottom: 1px solid var(--border-color); }
         .card-body { padding: 20px; }
         .card-title { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-        .card-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 15px; height: 40px; }
+        .card-desc { color: var(--text-dim); font-size: 14px; margin-bottom: 15px; min-height: 40px; }
         
         .duration-select { width: 100%; padding: 10px; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: var(--text-light); border-radius: 6px; margin-bottom: 15px; outline: none; }
         .card-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; }
@@ -60,12 +60,13 @@
         .buy-btn { background: transparent; border: 1px solid var(--primary-blue); color: var(--primary-blue); padding: 8px 16px; border-radius: 6px; cursor: pointer; font-weight: 700; transition: 0.3s; }
         .buy-btn:hover { background: var(--primary-blue); color: #000; box-shadow: 0 0 15px var(--accent-glow); }
 
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center; padding: 15px; }
         .modal.active { display: flex; }
-        .modal-content { background: #0f141f; border: 1px solid var(--border-color); width: 90%; max-width: 650px; border-radius: 15px; padding: 30px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 35px var(--accent-glow); }
-        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 24px; cursor: pointer; color: var(--text-dim); }
+        .modal-content { background: #0f141f; border: 1px solid var(--border-color); width: 100%; max-width: 650px; border-radius: 15px; padding: 30px; max-height: 90vh; overflow-y: auto; position: relative; box-shadow: 0 0 35px var(--accent-glow); }
+        .close-modal { position: absolute; top: 20px; left: 20px; font-size: 24px; cursor: pointer; color: var(--text-dim); transition: 0.2s; }
+        .close-modal:hover { color: var(--danger); }
 
-        .payment-options { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .payment-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin: 20px 0; }
         .pay-option { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 15px; border-radius: 10px; cursor: pointer; text-align: center; transition: 0.3s; }
         .pay-option.selected { border-color: var(--primary-blue); background: rgba(0, 210, 255, 0.1); }
         
@@ -74,7 +75,7 @@
         .input-group input { width: 100%; padding: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-light); outline: none; }
         .input-group input:focus { border-color: var(--primary-blue); }
 
-        .admin-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+        .admin-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 25px; }
         .stat-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border-color); padding: 15px; border-radius: 10px; text-align: center; }
         .stat-card h3 { font-size: 24px; color: var(--primary-blue); }
         
@@ -87,17 +88,23 @@
         .status-approved { background: rgba(46, 213, 115, 0.2); color: var(--success); border: 1px solid var(--success); }
         .status-rejected { background: rgba(255, 71, 87, 0.2); color: var(--danger); border: 1px solid var(--danger); }
 
-        .action-btn { padding: 5px 10px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; font-size: 12px; margin-left: 5px; }
+        .action-btn { padding: 6px 12px; border-radius: 5px; border: none; cursor: pointer; font-weight: bold; font-size: 12px; margin-left: 5px; }
         .btn-approve { background: var(--success); color: #000; }
         .btn-reject { background: var(--danger); color: #fff; }
 
         .success-box { background: rgba(46, 213, 115, 0.1); border: 1px solid var(--success); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .pending-box { background: rgba(255, 165, 0, 0.1); border: 1px solid var(--warning); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
         .item-key { font-family: monospace; background: #000; padding: 10px; border-radius: 5px; border: 1px dashed var(--primary-blue); color: var(--primary-blue); margin-top: 10px; word-break: break-all; }
+        .receipt-preview { width: 45px; height: 45px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 1px solid var(--primary-blue); }
+
+        @media (max-width: 768px) {
+            .nav-container { flex-direction: column; text-align: center; }
+            .hero h1 { font-size: 32px; }
+            .hero { padding: 30px 15px; }
+        }
     </style>
 </head>
 <body>
-
     <canvas id="bg-canvas"></canvas>
 
     <header>
@@ -110,7 +117,7 @@
             </ul>
             <div class="nav-actions">
                 <button class="cart-btn" onclick="openCart()"><i class="fa-solid fa-cart-shopping"></i> السلة <span class="cart-badge" id="cart-count">0</span></button>
-                <button class="admin-btn" onclick="openAdminAuth()"><i class="fa-solid fa-lock"></i> لوحة الأدمن</button>
+                <button class="admin-btn" onclick="openAdminAuth()"><i class="fa-solid fa-headset"></i> لوحة فريق الدعم</button>
             </div>
         </div>
     </header>
@@ -118,7 +125,7 @@
     <div class="container">
         <div class="hero">
             <h1>LEGACY STORE</h1>
-            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام تلقائي فوري بعد الدفع!</p>
+            <p>أفضل متجر لشراء ألعاب Steam، هاكات FiveM، والحسابات الجاهزة مع استلام تلقائي فوري وبوابة دفع آمنة عبر XPay!</p>
         </div>
 
         <h2 class="section-title" id="steam"><i class="fa-brands fa-steam"></i> ألعاب Steam</h2>
@@ -162,9 +169,9 @@
 
             <p style="margin-top: 15px; color: var(--text-dim);">اختر طريقة الدفع المناسبة:</p>
             <div class="payment-options">
-                <div class="pay-option" onclick="selectPayment('visa', this)">
+                <div class="pay-option" onclick="selectPayment('xpay', this)">
                     <i class="fa-brands fa-cc-visa"></i>
-                    <div>فيزا / ماستر كارد</div>
+                    <div>فيزا / ماستر كارد (XPay)</div>
                 </div>
                 <div class="pay-option" onclick="selectPayment('vodafone', this)">
                     <i class="fa-solid fa-mobile-screen-button"></i>
@@ -181,25 +188,12 @@
         </div>
     </div>
 
-    <!-- OTP Modal -->
-    <div class="modal" id="otp-modal">
-        <div class="modal-content" style="text-align: center;">
-            <i class="fa-solid fa-shield-halved" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
-            <h2>تأكيد رمز OTP</h2>
-            <p style="color: var(--text-dim); margin: 10px 0;">أدخل الكود المكون من 6 أرقام المرسل لهاتفك</p>
-            <div class="input-group" style="max-width: 250px; margin: 20px auto;">
-                <input type="text" id="otp-input" maxlength="6" placeholder="******" style="text-align: center; font-size: 24px; letter-spacing: 5px;">
-            </div>
-            <button class="cart-btn" style="width: 100%; justify-content: center;" onclick="confirmOTP()">تأكيد وإتمام الدفع</button>
-        </div>
-    </div>
-
     <!-- Success Modal -->
     <div class="modal" id="success-modal">
         <div class="modal-content" style="text-align: center;">
             <i class="fa-solid fa-circle-check" style="font-size: 60px; color: var(--success); margin-bottom: 15px;"></i>
             <h2>تم الشراء بنجاح!</h2>
-            <p style="color: var(--text-dim);">شكراً لثقتك بـ LEGACY STORE. تفاصيل طلبك المستلمة تلقائياً:</p>
+            <p style="color: var(--text-dim);">شكراً لثقتك بـ LEGACY STORE. تفاصيل طلبك:</p>
             <div id="deliveries-container"></div>
             <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('success-modal')">إغلاق</button>
         </div>
@@ -208,11 +202,11 @@
     <!-- Pending Approval Modal (Vodafone Cash) -->
     <div class="modal" id="pending-modal">
         <div class="modal-content" style="text-align: center;">
-            <i class="fa-solid fa-clock" style="font-size: 60px; color: var(--warning); margin-bottom: 15px;"></i>
-            <h2>طلبك قيد المراجعه!</h2>
+            <i class="fa-solid fa-paper-plane" style="font-size: 60px; color: var(--warning); margin-bottom: 15px;"></i>
+            <h2>تم إرسال الطلب إلى فريق الدعم!</h2>
             <div class="pending-box">
-                <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم استلام صورة إيصال التحويل بنجاح.</p>
-                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم أحد مشرفي الدعم الفني بمراجعة التحويل وتأكيده خلال دقائق. سيتم التواصل معك عبر رقم هاتف/حساب التواصل المرفق لإرسال الحساب.</p>
+                <p style="color: var(--text-light); font-weight: bold; font-size: 16px;">تم إرسال صورة التحويل ورقم المحول بنجاح.</p>
+                <p style="color: var(--text-dim); margin-top: 10px;">سيقوم فريق الدعم الفني بمراجعة التحويل فوراً. فور قبول الطلب، سيتم إرسال البيانات لك مباشرة.</p>
             </div>
             <button class="cart-btn" style="width: 100%; margin-top:20px; justify-content: center;" onclick="closeModal('pending-modal')">فهمت ذلك</button>
         </div>
@@ -221,28 +215,28 @@
     <!-- Admin Auth -->
     <div class="modal" id="admin-auth-modal">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
-            <i class="fa-solid fa-user-lock" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
-            <h2>لوحة الأدمن</h2>
+            <i class="fa-solid fa-headset" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
+            <h2>لوحة فريق الدعم</h2>
             <div class="input-group">
-                <input type="password" id="admin-pass" placeholder="كلمة السر">
+                <input type="password" id="admin-pass" placeholder="كلمة السر (legacy123)">
             </div>
             <button class="cart-btn" style="width: 100%; justify-content: center;" onclick="checkAdminAuth()">دخول</button>
         </div>
     </div>
 
-    <!-- Admin Dashboard -->
+    <!-- Admin Dashboard (Support Panel) -->
     <div class="modal" id="admin-modal">
-        <div class="modal-content" style="max-width: 1000px;">
+        <div class="modal-content" style="max-width: 1100px;">
             <i class="fa-solid fa-xmark close-modal" onclick="closeModal('admin-modal')"></i>
-            <h2>لوحة تحكم الأدمن <i class="fa-solid fa-user-shield"></i></h2>
+            <h2>لوحة تحكم فريق الدعم <i class="fa-solid fa-user-shield"></i></h2>
             
             <div class="admin-stats" style="margin-top:20px;">
                 <div class="stat-card"><p style="color:var(--text-dim);">إجمالي المبيعات المؤكدة</p><h3 id="stat-revenue">0$</h3></div>
-                <div class="stat-card"><p style="color:var(--text-dim);">عدد الطلبات</p><h3 id="stat-orders">0</h3></div>
-                <div class="stat-card"><p style="color:var(--text-dim);">الطلبات قيد الانتظار</p><h3 id="stat-pending" style="color:var(--warning);">0</h3></div>
+                <div class="stat-card"><p style="color:var(--text-dim);">إجمالي الطلبات</p><h3 id="stat-orders">0</h3></div>
+                <div class="stat-card"><p style="color:var(--text-dim);">طلبات تنتظر موافقة الدعم</p><h3 id="stat-pending" style="color:var(--warning);">0</h3></div>
             </div>
 
-            <h3><i class="fa-solid fa-list"></i> سجل الطلبات والتواصل مع العملاء</h3>
+            <h3><i class="fa-solid fa-list"></i> طلبات المراجعة والموافقة</h3>
             <div style="overflow-x: auto; margin-top: 15px;">
                 <table>
                     <thead>
@@ -250,12 +244,12 @@
                             <th>رقم الطلب</th>
                             <th>العميل</th>
                             <th>رقم التواصل</th>
+                            <th>الرقم المـحوّل منه</th>
                             <th>المنتجات</th>
                             <th>المبلغ</th>
-                            <th>طريقة الدفع</th>
                             <th>الإيصال</th>
                             <th>الحالة</th>
-                            <th>إجراء</th>
+                            <th>إجراء الفريق</th>
                         </tr>
                     </thead>
                     <tbody id="admin-orders-table"></tbody>
@@ -265,12 +259,14 @@
     </div>
 
     <script>
-        // Database
+        // Store Products Catalog Data
         const products = {
             steam: [
                 { id: 101, name: "GTA V Premium", price: 15, delivery: "Steam Account: gta_user_99 : Pass_2026! | Backup Code: 887211", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500" },
                 { id: 102, name: "Cyberpunk 2077", price: 30, delivery: "Key: CYBER-9981-X772-L990", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
                 { id: 103, name: "Red Dead Redemption 2", price: 25, delivery: "Key: RDR2-9011-8821-MM00", img: "https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500" }
+                { id: 104, name: "Cyberpunk 2077", price: 40, delivery: "Key: CYBER-9981-X772-L990", img: "https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500" },
+
             ],
             fivem: [
                 { id: 201, name: "FiveM Mod Menu (VIP)", prices: { day: 5, week: 15, month: 30, lifetime: 80 }, delivery: "Download Link: https://legacy-store.com/download/modmenu.exe | License: VIP-KEY-998", img: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500" },
@@ -283,10 +279,12 @@
             ]
         };
 
+        // Put your Real XPay Link / Portal URL here
+        const XPAY_PAYMENT_URL = "https://app.xpay.app/ar/acct_3NgXgLE728fwapZtlpPNU2"; 
+
         let cart = [];
         let orders = [];
         let selectedPaymentMethod = '';
-        let generatedOTP = '';
         let uploadedReceiptUrl = '';
         const ADMIN_PASS = "legacy123";
 
@@ -295,7 +293,7 @@
             products.steam.forEach(p => {
                 steamGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img">
+                        <img src="${p.img}" class="card-img" alt="${p.name}">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <div class="card-desc">لعبة ستيم أصلية تسليم فوري</div>
@@ -311,7 +309,7 @@
             products.fivem.forEach(p => {
                 fivemGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img">
+                        <img src="${p.img}" class="card-img" alt="${p.name}">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <select class="duration-select" id="dur-${p.id}" onchange="updateHackPrice(${p.id})">
@@ -332,7 +330,7 @@
             products.accounts.forEach(p => {
                 accountsGrid.innerHTML += `
                     <div class="card">
-                        <img src="${p.img}" class="card-img">
+                        <img src="${p.img}" class="card-img" alt="${p.name}">
                         <div class="card-body">
                             <div class="card-title">${p.name}</div>
                             <div class="card-desc">${p.desc}</div>
@@ -343,6 +341,7 @@
                         </div>
                     </div>`;
             });
+            initCanvas();
         }
 
         function updateHackPrice(id) {
@@ -398,21 +397,12 @@
             el.classList.add('selected');
 
             const container = document.getElementById('payment-details');
-            if (method === 'visa') {
+            if (method === 'xpay') {
                 container.innerHTML = `
-                    <div class="input-group">
-                        <label>رقم الفيزا (16 رقم)</label>
-                        <input type="text" id="card-num" maxlength="16" placeholder="4000123456789010">
-                    </div>
-                    <div style="display:flex; gap:10px;">
-                        <div class="input-group" style="flex:1;">
-                            <label>تاريخ الانتهاء</label>
-                            <input type="text" id="card-exp" placeholder="MM/YY" maxlength="5">
-                        </div>
-                        <div class="input-group" style="flex:1;">
-                            <label>رمز CVV</label>
-                            <input type="text" id="card-cvv" placeholder="123" maxlength="3">
-                        </div>
+                    <div style="background:rgba(0, 210, 255, 0.1); border:1px solid var(--primary-blue); padding:15px; border-radius:8px; margin:15px 0; text-align:center;">
+                        <i class="fa-solid fa-shield-halved" style="font-size:30px; color:var(--primary-blue); margin-bottom:10px;"></i>
+                        <p style="font-weight:bold; color:#fff;">دفع آمن 100% عبر بوابة XPay المعترف بها</p>
+                        <p style="font-size:12px; color:var(--text-dim); margin-top:5px;">سيتم توجيهك إلى صفحة الدفع الرسمية لاستكمال العملية بأمان.</p>
                     </div>`;
             } else if (method === 'vodafone') {
                 container.innerHTML = `
@@ -420,7 +410,11 @@
                         حول المبلغ إلى الرقم: <div style="font-size:24px; font-weight:bold; color:var(--success);">01064678474</div>
                     </div>
                     <div class="input-group">
-                        <label>إرفاق صورة إيصال التحويل (Screenshot)</label>
+                        <label style="color:var(--warning);">* رقم الهاتف المحول منه</label>
+                        <input type="text" id="sender-phone" placeholder="أدخل الرقم الذي قمت بالتحويل منه (010/011/012/015)">
+                    </div>
+                    <div class="input-group">
+                        <label style="color:var(--warning);">* إرفاق صورة إيصال التحويل (Screenshot)</label>
                         <input type="file" id="vodafone-receipt" accept="image/*" onchange="handleReceiptUpload(event)">
                     </div>`;
             } else {
@@ -432,27 +426,9 @@
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    uploadedReceiptUrl = e.target.result;
-                };
+                reader.onload = function(e) { uploadedReceiptUrl = e.target.result; };
                 reader.readAsDataURL(file);
             }
-        }
-
-        // Luhn Algorithm for Visa Validation
-        function isValidCard(number) {
-            let sum = 0;
-            let isSecond = false;
-            for (let i = number.length - 1; i >= 0; i--) {
-                let d = parseInt(number.charAt(i));
-                if (isSecond) {
-                    d *= 2;
-                    if (d > 9) d -= 9;
-                }
-                sum += d;
-                isSecond = !isSecond;
-            }
-            return (sum % 10 === 0);
         }
 
         function validateAndSubmit() {
@@ -461,39 +437,20 @@
             if (!name || !phone) return alert("من فضلك أدخل اسمك ورقم التواصل للتأكيد!");
             if (!selectedPaymentMethod) return alert("اختر طريقة الدفع!");
 
-            if (selectedPaymentMethod === 'visa') {
-                const cardNum = document.getElementById('card-num').value.replace(/\s+/g, '');
-                const cardExp = document.getElementById('card-exp').value;
-                const cardCvv = document.getElementById('card-cvv').value;
-
-                if (cardNum.length < 16 || !isValidCard(cardNum)) return alert("رقم الفيزا غير صحيح!");
-                if (!cardExp.includes('/') || cardCvv.length < 3) return alert("بيانات تاريخ الانتهاء أو CVV غير صحيحة!");
-
-                // Generate Real OTP Simulation
-                generatedOTP = Math.floor(100000 + Math.random() * 900000).toString();
-                alert(`[رمز أمان البنك (OTP)] كود التفعيل الخاص بك هو: ${generatedOTP}`);
-                
-                closeModal('checkout-modal');
-                document.getElementById('otp-modal').classList.add('active');
+            if (selectedPaymentMethod === 'xpay') {
+                window.open(XPAY_PAYMENT_URL, '_blank');
+                completePurchase('Approved', '-');
             } else if (selectedPaymentMethod === 'vodafone') {
+                const senderPhone = document.getElementById('sender-phone').value.trim();
+                if (!senderPhone) return alert("يرجى إدخال رقم الهاتف الذي قمت بالتحويل منه!");
                 if (!uploadedReceiptUrl) return alert("من فضلك أرفق صورة إيصال التحويل أولاً!");
-                completePurchase('Pending');
+                completePurchase('Pending', senderPhone);
             } else {
-                completePurchase('Approved');
+                completePurchase('Approved', '-');
             }
         }
 
-        function confirmOTP() {
-            const inputOTP = document.getElementById('otp-input').value;
-            if (inputOTP === generatedOTP) {
-                closeModal('otp-modal');
-                completePurchase('Approved');
-            } else {
-                alert("رمز OTP خاطئ! حاول مجدداً.");
-            }
-        }
-
-        function completePurchase(initialStatus = 'Approved') {
+        function completePurchase(initialStatus = 'Approved', senderPhone = '-') {
             const name = document.getElementById('cust-name').value;
             const phone = document.getElementById('cust-phone').value;
             let total = cart.reduce((sum, item) => sum + item.price, 0);
@@ -502,12 +459,13 @@
                 id: Math.floor(100000 + Math.random() * 900000),
                 customer: name,
                 phone: phone,
+                senderPhone: senderPhone,
                 items: cart.map(i => i.name).join(', '),
                 deliveries: cart.map(i => ({ name: i.name, del: i.delivery })),
                 total: total,
                 method: selectedPaymentMethod,
                 receipt: uploadedReceiptUrl,
-                status: initialStatus // Approved, Pending, Rejected
+                status: initialStatus
             };
 
             orders.push(order);
@@ -516,130 +474,128 @@
             closeModal('checkout-modal');
 
             if (initialStatus === 'Approved') {
-                // Display Instant Delivery to Client
-                const container = document.getElementById('deliveries-container');
-                container.innerHTML = '';
-                order.deliveries.forEach(d => {
-                    container.innerHTML += `
-                        <div class="success-box">
-                            <strong>${d.name}</strong>
-                            <div class="item-key">${d.del}</div>
-                        </div>`;
-                });
-                document.getElementById('success-modal').classList.add('active');
+                renderSuccessDelivery(order);
             } else {
-                // Show Pending Modal for Vodafone Cash
                 document.getElementById('pending-modal').classList.add('active');
             }
             uploadedReceiptUrl = '';
+            updateAdminDashboard();
+        }
+
+        function renderSuccessDelivery(order) {
+            const container = document.getElementById('deliveries-container');
+            container.innerHTML = '';
+            order.deliveries.forEach(d => {
+                container.innerHTML += `
+                    <div class="success-box">
+                        <strong>${d.name}</strong>
+                        <div class="item-key">${d.del}</div>
+                    </div>`;
+            });
+            document.getElementById('success-modal').classList.add('active');
         }
 
         function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
+        
         function checkAdminAuth() {
-            if (document.getElementById('admin-pass').value === ADMIN_PASS) {
+            if (document.getElementById('admin-pass').value === ADMIN_PASS) {SASA2010
                 closeModal('admin-auth-modal');
-                openAdmin();
-            } else alert("كلمة السر خاطئة!");
+                updateAdminDashboard();
+                document.getElementById('admin-modal').classList.add('active');
+            } else {
+                alert("كلمة السر خاطئة!");
+            }
         }
 
-        function openAdmin() {
-            document.getElementById('admin-modal').classList.add('active');
-            
-            let totalRevenue = orders.filter(o => o.status === 'Approved').reduce((sum, o) => sum + o.total, 0);
-            let pendingCount = orders.filter(o => o.status === 'Pending').length;
+        function updateAdminDashboard() {
+            const revenue = orders.filter(o => o.status === 'Approved').reduce((sum, o) => sum + o.total, 0);
+            const pendingCount = orders.filter(o => o.status === 'Pending').length;
 
-            document.getElementById('stat-revenue').innerText = `${totalRevenue}$`;
+            document.getElementById('stat-revenue').innerText = `${revenue}$`;
             document.getElementById('stat-orders').innerText = orders.length;
             document.getElementById('stat-pending').innerText = pendingCount;
 
-            const table = document.getElementById('admin-orders-table');
-            table.innerHTML = '';
-            orders.forEach(o => {
-                let receiptTd = o.receipt ? `<a href="${o.receipt}" target="_blank" style="color:var(--primary-blue);">عرض الإيصال</a>` : '-';
+            const tbody = document.getElementById('admin-orders-table');
+            tbody.innerHTML = '';
+
+            orders.forEach((o, index) => {
+                let badgeClass = o.status === 'Approved' ? 'status-approved' : (o.status === 'Pending' ? 'status-pending' : 'status-rejected');
+                let receiptImg = o.receipt ? `<img src="${o.receipt}" class="receipt-preview" onclick="window.open('${o.receipt}')" alt="Receipt">` : '-';
                 
-                let statusClass = 'status-pending';
-                let statusText = 'قيد الانتظار';
-                if (o.status === 'Approved') { statusClass = 'status-approved'; statusText = 'مقبول'; }
-                if (o.status === 'Rejected') { statusClass = 'status-rejected'; statusText = 'مرفوض'; }
-
-                let actionBtns = '-';
-                if (o.status === 'Pending') {
-                    actionBtns = `
-                        <button class="action-btn btn-approve" onclick="approveOrder(${o.id})">موافقة</button>
-                        <button class="action-btn btn-reject" onclick="rejectOrder(${o.id})">رفض</button>
-                    `;
-                }
-
-                table.innerHTML += `
+                tbody.innerHTML += `
                     <tr>
                         <td>#${o.id}</td>
-                        <td style="font-weight:bold;">${o.customer}</td>
-                        <td style="color:var(--primary-blue);">${o.phone}</td>
-                        <td style="font-size:11px;">${o.items}</td>
-                        <td style="color:var(--success); font-weight:bold;">${o.total}$</td>
-                        <td>${o.method}</td>
-                        <td>${receiptTd}</td>
-                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
-                        <td>${actionBtns}</td>
+                        <td>${o.customer}</td>
+                        <td>${o.phone}</td>
+                        <td>${o.senderPhone}</td>
+                        <td>${o.items}</td>
+                        <td style="color:var(--primary-blue); font-weight:bold;">${o.total}$</td>
+                        <td>${receiptImg}</td>
+                        <td><span class="status-badge ${badgeClass}">${o.status}</span></td>
+                        <td>
+                            ${o.status === 'Pending' ? `
+                                <button class="action-btn btn-approve" onclick="approveOrder(${index})">قبول</button>
+                                <button class="action-btn btn-reject" onclick="rejectOrder(${index})">رفض</button>
+                            ` : '-'}
+                        </td>
                     </tr>`;
             });
         }
 
-        function approveOrder(orderId) {
-            let order = orders.find(o => o.id === orderId);
-            if (order) {
-                order.status = 'Approved';
-                alert(`تم القبول! البيانات الخاصة بالطلب المشتري هي:\n\n${order.deliveries.map(d => d.name + ':\n' + d.del).join('\n\n')}\n\nقم بنسخ البيانات وإرسالها للعميل عبر رقم التواصل الخاص به.`);
-                openAdmin();
+        function approveOrder(index) {
+            orders[index].status = 'Approved';
+            updateAdminDashboard();
+            alert(`تم قبول الطلب #${orders[index].id} بنجاح وتسليم العميل!`);
+        }
+
+        function rejectOrder(index) {
+            orders[index].status = 'Rejected';
+            updateAdminDashboard();
+            alert(`تم رفض الطلب #${orders[index].id}`);
+        }
+
+        function initCanvas() {
+            const canvas = document.getElementById('bg-canvas');
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
             }
-        }
 
-        function rejectOrder(orderId) {
-            let order = orders.find(o => o.id === orderId);
-            if (order) {
-                order.status = 'Rejected';
-                alert("تم رفض الطلب.");
-                openAdmin();
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            let particles = [];
+            for (let i = 0; i < 60; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    vx: (Math.random() - 0.5) * 0.5,
+                    vy: (Math.random() - 0.5) * 0.5
+                });
             }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.fillStyle = 'rgba(0, 210, 255, 0.4)';
+                particles.forEach(p => {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
+                    if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
+                });
+                requestAnimationFrame(animate);
+            }
+            animate();
         }
 
-        // Canvas Effect
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = Array.from({ length: 60 }, () => ({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 2 + 1,
-            vx: (Math.random() - 0.5) * 0.8,
-            vy: (Math.random() - 0.5) * 0.8
-        }));
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = 'rgba(0, 210, 255, 0.6)';
-            ctx.strokeStyle = 'rgba(0, 210, 255, 0.08)';
-
-            particles.forEach((p, i) => {
-                p.x += p.vx; p.y += p.vy;
-                if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-                ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fill();
-
-                for (let j = i + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    if (Math.hypot(p.x - p2.x, p.y - p2.y) < 150) {
-                        ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
-                    }
-                }
-            });
-            requestAnimationFrame(animate);
-        }
-        animate();
-        initApp();
+        window.onload = initApp;
     </script>
 </body>
 </html>
