@@ -92,7 +92,6 @@
         .btn-reject { background: var(--danger); color: #fff; }
 
         .pending-box { background: rgba(255, 165, 0, 0.1); border: 1px solid var(--warning); padding: 20px; border-radius: 10px; text-align: center; margin-top: 15px; }
-        .item-key { font-family: monospace; background: #000; padding: 10px; border-radius: 5px; border: 1px dashed var(--primary-blue); color: var(--primary-blue); margin-top: 10px; word-break: break-all; }
         .receipt-preview { width: 50px; height: 50px; object-fit: cover; border-radius: 5px; cursor: pointer; border: 1px solid var(--primary-blue); }
     </style>
 </head>
@@ -181,7 +180,7 @@
         </div>
     </div>
 
-    <!-- Pending Approval Modal (Vodafone Cash) -->
+    <!-- Pending Approval Modal -->
     <div class="modal" id="pending-modal">
         <div class="modal-content" style="text-align: center;">
             <i class="fa-solid fa-paper-plane" style="font-size: 60px; color: var(--warning); margin-bottom: 15px;"></i>
@@ -197,16 +196,18 @@
     <!-- Admin Auth -->
     <div class="modal" id="admin-auth-modal">
         <div class="modal-content" style="max-width: 400px; text-align: center;">
+            <i class="fa-solid fa-xmark close-modal" onclick="closeModal('admin-auth-modal')"></i>
             <i class="fa-solid fa-headset" style="font-size: 50px; color: var(--primary-blue); margin-bottom: 15px;"></i>
             <h2>لوحة فريق الدعم</h2>
+            <p style="font-size:12px; color:var(--text-dim); margin-top:5px;">كلمة السر الحالية: 123</p>
             <div class="input-group" style="margin-top:15px;">
-                <input type="password" id="admin-pass" placeholder="كلمة السر">
+                <input type="password" id="admin-pass" placeholder="كلمة السر (123)">
             </div>
             <button class="cart-btn" style="width: 100%; justify-content: center;" onclick="checkAdminAuth()">دخول</button>
         </div>
     </div>
 
-    <!-- Admin Dashboard (Support Panel) -->
+    <!-- Admin Dashboard -->
     <div class="modal" id="admin-modal">
         <div class="modal-content" style="max-width: 1100px;">
             <i class="fa-solid fa-xmark close-modal" onclick="closeModal('admin-modal')"></i>
@@ -241,13 +242,11 @@
     </div>
 
     <script>
-        // رابط بوابة الفيزا
         const XPAY_PAYMENT_URL = "https://app.xpay.app/ar/acct_3NgXgLE728fwapZtIpPNU2";
-        // رابط الدفع الخاص بـ PayPal (يمكنك تغييره لحسابك المباشر)
         const PAYPAL_PAYMENT_URL = "https://www.paypal.me/";
 
-        // كلمة سر لوحة الدعم الفني
-        const ADMIN_PASS = "legacy123";
+        // كلمة سر لوحة التحكم
+        const ADMIN_PASS = "123";
 
         const products = {
             steam: [
@@ -423,9 +422,7 @@
             if (selectedPaymentMethod === 'visa') {
                 window.location.href = XPAY_PAYMENT_URL;
             } else if (selectedPaymentMethod === 'paypal') {
-                // حفظ الطلب في لوحة التحكم مع الحالة Pending
                 saveOrderToDashboard('Pending', 'PayPal Direct');
-                // توجيه العميل فوراً لدفع بايبال بدون إظهار أو تسليم أي حساب
                 window.location.href = PAYPAL_PAYMENT_URL;
             } else if (selectedPaymentMethod === 'vodafone') {
                 const senderPhone = document.getElementById('sender-phone').value.trim();
@@ -460,7 +457,11 @@
             uploadedReceiptUrl = '';
         }
 
-        function openAdminAuth() { document.getElementById('admin-auth-modal').classList.add('active'); }
+        function openAdminAuth() { 
+            document.getElementById('admin-pass').value = '';
+            document.getElementById('admin-auth-modal').classList.add('active'); 
+        }
+
         function checkAdminAuth() {
             const enteredPass = document.getElementById('admin-pass').value.trim();
             if (enteredPass === ADMIN_PASS) {
@@ -468,7 +469,7 @@
                 renderAdminDashboard();
                 document.getElementById('admin-modal').classList.add('active');
             } else {
-                alert("كلمة السر خاطئة!");
+                alert("كلمة السر خاطئة! الكلمة المحددة هي 123");
             }
         }
 
